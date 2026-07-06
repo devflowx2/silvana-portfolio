@@ -8,12 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #29041c;
-    --surface: #171A21;
+    --bg: #24061c;
+    --surface: #0a0a0a;
     --surface-2: #1E222B;
-    --line: #2A2F3A;
+    --line: #dfcf44;
     --text: #F2F0EA;
-    --muted: #8B92A3;
+    --muted: #d0bbcd;
     --gold: #E8B94F;
     --teal: #5FD3C4;
     --radius: 14px;
@@ -47,12 +47,11 @@
     padding:22px 6vw;
     z-index:100;
     backdrop-filter:blur(10px);
-    background:rgba(123, 110, 121, 0.6);
+    background:rgba(172, 152, 172, 0.803);
     border-bottom:1px solid transparent;
     transition:border-color .3s ease, background .3s ease;
   }
   header.scrolled{ border-color:var(--line); background:rgba(213, 39, 181, 0); }
-
   .logo{
     font-family:'Fraunces', serif;
     font-size:1.15rem;
@@ -164,7 +163,7 @@ border-radius:8px;
   }
   .btn-primary{
     background:var(--gold);
-    color:#0F1115;
+    color:#0e1014;
     font-weight:500;
   }
   .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 10px 30px -8px rgba(232,185,79,0.5); }
@@ -194,7 +193,7 @@ border-radius:8px;
     position:absolute;
     bottom:6px; right:6px;
     background:var(--gold);
-    color:#0F1115;
+    color:#fcfcfc;
     font-family:'JetBrains Mono', monospace;
     font-weight:500;
     font-size:.8rem;
@@ -243,6 +242,7 @@ border-radius:8px;
     font-size:clamp(1.8rem, 4vw, 2.6rem);
     font-weight:600;
     margin-bottom:36px;
+    color: #feffff;
   }
 
   .reveal{
@@ -351,6 +351,67 @@ border-radius:8px;
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
   }
+  .certificates-section {
+  padding: 60px 20px;
+  background-color: #a28094;
+  text-align: center;
+}
+.section-subtitle {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.certificate-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+.certificate-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.certificate-image {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background-color: #f2f0f1;
+}
+
+.certificate-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.certificate-info {
+  padding: 20px;
+}
+
+.certificate-info h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #222;
+}
+
+.certificate-info p {
+  font-size: 14px;
+  color: #d1acc3;
+  line-height: 1.6;
+}
 </style>
 </head>
 <body>
@@ -418,8 +479,56 @@ border-radius:8px;
     <div class="section-label">03 — projects</div>
     <h2 class="section-title">Projects</h2>
     <div class="project-card">
-      <span class="mono">// coming soon</span>
-      My first projects are in progress — check back soon.
+  <span class="mono">// project 01</span>
+  <h3 style="font-family:'Fraunces', serif; font-size:1.4rem; margin:14px 0; color:var(--text);">
+    My First Portfolio
+  </h3>
+  <p style="color:var(--muted); margin-bottom:20px;">
+    Where it all began — my very first web project, built from the ground up with HTML, CSS, and JavaScript. A small step that taught me the fundamentals of front-end development.
+  </p>
+  <a href="https://silvanaali145-alt.github.io/my-first-project/" target="_blank" class="btn btn-primary">
+    View Project →
+  </a>
+  </div>
+</section>
+<section class="certificates-section" id="certificates">
+  <div class="container">
+    <h2 class="section-title">My Certificates</h2>
+    <p class="section-subtitle">A collection of certifications and achievements</p>
+
+    <div class="certificates-grid">
+
+      <!-- شهادة 1: Prompt Engineering -->
+      <div class="certificate-card">
+        <div class="certificate-image">
+          <img src="certificat.AI2.jpg" alt="Prompt Engineering Certificate">
+        </div>
+        <div class="certificate-info">
+          <h3>Prompt Engineering for AI</h3>
+          <p>
+            Successfully completed the "1 Million Prompters" initiative by
+            Dubai Future Foundation and Dubai Centre for Artificial
+            Intelligence, focused on mastering AI prompt engineering skills
+            in alignment with Dubai's AI strategy.
+          </p>
+        </div>
+      </div>
+
+      <!-- شهادة 2: HTML -->
+      <div class="certificate-card">
+        <div class="certificate-image">
+          <img src="certificat html.jpg" alt="Introduction to HTML Certificate">
+        </div>
+        <div class="certificate-info">
+          <h3>Introduction to HTML</h3>
+          <p>
+            Completed the "Introduction to HTML" course by Sololearn,
+            demonstrating both theoretical and practical understanding of
+            HTML fundamentals for building web pages.
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -478,4 +587,4 @@ border-radius:8px;
 </script>
 
 </body>
-</html>lass="contact-wrap">
+</html>
