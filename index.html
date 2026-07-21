@@ -4,587 +4,402 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Silvana — Front-End Developer</title>
+<meta name="description" content="Silvana — Front-End Developer portfolio. Building fast, clean, and expressive interfaces.">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #24061c;
-    --surface: #0a0a0a;
-    --surface-2: #1E222B;
-    --line: #dfcf44;
-    --text: #F2F0EA;
-    --muted: #d0bbcd;
-    --gold: #E8B94F;
-    --teal: #5FD3C4;
-    --radius: 14px;
-  }
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  *{ margin:0; padding:0; box-sizing:border-box; }
+<link rel="stylesheet" href="style.css">
 
-  html{ scroll-behavior:smooth; }
-
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter', sans-serif;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-
-  ::selection{ background:var(--gold); color:#d4cad0; }
-
-  a{ color:inherit; text-decoration:none; }
-
-  .mono{ font-family:'JetBrains Mono', monospace; }
-
-  /* ---------- NAV ---------- */
-  header{
-    position:fixed;
-    top:0; left:0; right:0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:22px 6vw;
-    z-index:100;
-    backdrop-filter:blur(10px);
-    background:rgba(172, 152, 172, 0.803);
-    border-bottom:1px solid transparent;
-    transition:border-color .3s ease, background .3s ease;
-  }
-  header.scrolled{ border-color:var(--line); background:rgba(213, 39, 181, 0); }
-  .logo{
-    font-family:'Fraunces', serif;
-    font-size:1.15rem;
-    font-weight:600;
-    letter-spacing:.5px;
-  }
-  .logo span{ color:var(--gold); }
-
-  nav ul{
-    display:flex;
-    gap:34px;
-    list-style:none;
-  }
-  nav a{
-    font-family:'JetBrains Mono', monospace;
-    font-size:.82rem;
-    color:var(--muted);
-    position:relative;
-    padding-bottom:4px;
-  }
-  nav a::before{ content:"// "; color:var(--teal); opacity:0; transition:opacity .25s ease; }
-  nav a:hover::before{ opacity:1; }
-  nav a::after{
-    content:"";
-    position:absolute; left:0; bottom:0;
-    width:0; height:1px;
-    background:var(--gold);
-    transition:width .25s ease;
-  }
-  nav a:hover{ color:var(--text); }
-  nav a:hover::after{ width:100%; }
-
-  @media (max-width:720px){ nav ul{ display:none; } }
-
-  /* ---------- HERO ---------- */
-  .hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:120px 6vw 60px;
-    position:relative;
-  }
-
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:60px;
-    max-width:1180px;
-    width:100%;
-    align-items:center;
-  }
-  @media (max-width:880px){
-    .hero-grid{ grid-template-columns:1fr; text-align:center; }
-    .hero-photo-wrap{ order:-1; margin:0 auto; }
-  }
-
-  .eyebrow{
-    color:var(--teal);
-    font-size:.85rem;
-    letter-spacing:.5px;
-    margin-bottom:22px;
-    display:inline-block;
-  }
-  .eyebrow::before{ content:'"'; color:var(--muted); }
-  .eyebrow::after{ content:'"'; color:var(--muted); }
-
-  .headline{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(2.4rem, 6vw, 4.4rem);
-    line-height:1.05;
-    min-height:1.1em;
-  }
-  .headline .cursor{
-    display:inline-block;
-    width:3px;
-    background:var(--gold);
-    margin-left:4px;
-    animation:blink 1s step-end infinite;
-  }
-  @keyframes blink{ 50%{ opacity:0; } }
-
-  .role{
-    margin-top:20px;
-    font-size:clamp(1.05rem, 2vw, 1.35rem);
-    color:var(--muted);
-    font-weight:400;
-  }
-  .role .accent{ color:var(--gold); font-family:'JetBrains Mono', monospace; font-size:.9em; }
-
-  .hero-actions{
-    margin-top:38px;
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  @media (max-width:880px){ .hero-actions{ justify-content:center; } }
-
-  .btn{
-    padding:13px 26px;
-border-radius:8px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:.85rem;
-    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-  }
-  .btn-primary{
-    background:var(--gold);
-    color:#0e1014;
-    font-weight:500;
-  }
-  .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 10px 30px -8px rgba(232,185,79,0.5); }
-  .btn-ghost{
-    border:1px solid var(--line);
-    color:var(--text);
-  }
-  .btn-ghost:hover{ border-color:var(--teal); color:var(--teal); transform:translateY(-3px); }
-
-  /* ---------- PHOTO ---------- */
-  .hero-photo-wrap{
-    position:relative;
-    width:min(320px, 70vw);
-    aspect-ratio:1/1;
-    margin-left:auto;
-  }
-  .hero-photo-wrap::before{
-    content:"";
-    position:absolute;
-    inset:-14px;
-    border:1px solid var(--line);
-    border-radius:50%;
-    animation:spin 22s linear infinite;
-  }
-  .hero-photo-wrap::after{
-    content:"</>";
-    position:absolute;
-    bottom:6px; right:6px;
-    background:var(--gold);
-    color:#fcfcfc;
-    font-family:'JetBrains Mono', monospace;
-    font-weight:500;
-    font-size:.8rem;
-    padding:6px 10px;
-    border-radius:50%;
-    width:38px; height:38px;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 0 0 6px var(--bg);
-  }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
-
-  .hero-photo{
-    width:100%; height:100%;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid var(--surface-2);
-    box-shadow:0 20px 50px -15px rgba(0,0,0,0.6);
-    transition:transform .5s ease, filter .5s ease;
-    filter:grayscale(15%);
-  }
-  .hero-photo-wrap:hover .hero-photo{
-    transform:scale(1.04) rotate(-1deg);
-    filter:grayscale(0%);
-  }
-
-  /* ---------- SECTIONS ---------- */
-  section{
-    padding:110px 6vw;
-    max-width:1180px;
-    margin:0 auto;
-  }
-
-  .section-label{
-    font-family:'JetBrains Mono', monospace;
-    color:var(--gold);
-    font-size:.85rem;
-    margin-bottom:14px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .section-label::before{ content:""; width:26px; height:1px; background:var(--gold); }
-
-  .section-title{
-    font-family:'Fraunces', serif;
-    font-size:clamp(1.8rem, 4vw, 2.6rem);
-    font-weight:600;
-    margin-bottom:36px;
-    color: #feffff;
-  }
-
-  .reveal{
-    opacity:0;
-    transform:translateY(28px);
-    transition:opacity .7s ease, transform .7s ease;
-  }
-  .reveal.visible{ opacity:1; transform:translateY(0); }
-
-  /* ---------- ABOUT ---------- */
-  .about-text{
-    font-size:1.1rem;
-    color:var(--muted);
-    max-width:640px;
-  }
-  .about-text strong{ color:var(--text); font-weight:500; }
-
-  /* ---------- SKILLS ---------- */
-  .skills-grid{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-  }
-  .skill-pill{
-    font-family:'JetBrains Mono', monospace;
-    font-size:.9rem;
-    padding:12px 20px;
-    border-radius:8px;
-    background:var(--surface);
-    border:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    transition:border-color .25s ease, transform .25s ease, background .25s ease;
-  }
-  .skill-pill:hover{
-    border-color:var(--teal);
-    background:var(--surface-2);
-    transform:translateY(-4px);
-  }
-  .skill-pill .dot{ width:8px; height:8px; border-radius:50%; }
-
-  /* ---------- PROJECTS ---------- */
-  .project-card{
-    border:1px dashed var(--line);
-    border-radius:var(--radius);
-    padding:50px 34px;
-    text-align:center;
-    color:var(--muted);
-    position:relative;
-    overflow:hidden;
-  }
-  .project-card::before{
-    content:"01";
-    position:absolute;
-    top:14px; left:20px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:.75rem;
-    color:var(--line);
-  }
-  .project-card .mono{ color:var(--gold); display:block; margin-bottom:10px; }
-/* ---------- CONTACT ---------- */
-  .contact-wrap{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-    max-width:480px;
-  }
-  .contact-link{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px 24px;
-    background:var(--surface);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    transition:border-color .25s ease, transform .25s ease, background .25s ease;
-  }
-  .contact-link:hover{
-    border-color:var(--gold);
-    background:var(--surface-2);
-    transform:translateX(6px);
-  }
-  .contact-link .label{ display:flex; align-items:center; gap:14px; font-weight:500; }
-  .contact-link .icon{
-    width:38px; height:38px;
-    border-radius:50%;
-    background:var(--surface-2);
-    display:flex; align-items:center; justify-content:center;
-    font-size:1.1rem;
-  }
-  .contact-link .arrow{ color:var(--muted); transition:transform .25s ease, color .25s ease; }
-  .contact-link:hover .arrow{ transform:translateX(4px); color:var(--gold); }
-
-  /* ---------- FOOTER ---------- */
-  footer{
-    text-align:center;
-    padding:40px 6vw 50px;
-    color:var(--muted);
-    font-family:'JetBrains Mono', monospace;
-    font-size:.8rem;
-    border-top:1px solid var(--line);
-  }
-  footer span{ color:var(--gold); }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation:none !important; transition:none !important; }
-  }
-  .certificates-section {
-  padding: 60px 20px;
-  background-color: #a28094;
-  text-align: center;
-}
-.section-subtitle {
-  color: #666;
-  margin-bottom: 40px;
-}
-
-.certificates-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.certificate-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
-}
-
-.certificate-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.certificate-image {
-  width: 100%;
-  height: 220px;
-  overflow: hidden;
-  background-color: #f2f0f1;
-}
-
-.certificate-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.certificate-info {
-  padding: 20px;
-}
-
-.certificate-info h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #222;
-}
-
-.certificate-info p {
-  font-size: 14px;
-  color: #d1acc3;
-  line-height: 1.6;
-}
-</style>
+<!-- <link rel="icon" href="assets/favicon.png"> -->
 </head>
 <body>
 
-<header id="siteHeader">
-  <div class="logo">silvana<span>.codes</span></div>
-  <nav>
-    <ul>
-      <li><a href="#about">about</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
+<!-- ============ CUSTOM CURSOR ============ -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ============ PROGRESS BAR ============ -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar" id="navbar">
+  <a href="#hero" class="logo">
+    <span class="logo-bracket">&lt;</span>DEV<span class="logo-bracket">/&gt;</span>
+  </a>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="#about" class="nav-link"><span class="nav-index">01</span>About</a>
+    <a href="#certificates" class="nav-link"><span class="nav-index">02</span>Certificates</a>
+    <a href="#projects" class="nav-link"><span class="nav-index">03</span>Projects</a>
+    <a href="#github" class="nav-link"><span class="nav-index">04</span>GitHub</a>
+    <a href="#contact" class="nav-link"><span class="nav-index">05</span>Contact</a>
   </nav>
+
+  <a href="#contact" class="btn btn-small btn-outline nav-cta">Let's Talk</a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
-<section class="hero">
-  <div class="hero-grid">
-    <div>
-      <span class="eyebrow mono">hello world</span>
-      <h1 class="headline" id="typedHeadline"></h1>
-      <p class="role">Front-End Developer <span class="accent">/ silvana.codes</span></p>
-      <p>
-        creating modern, responsive, and visually engaging web experiences
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects →</a>
-        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-      </div>
-    </div>
+<main>
 
-    <div class="hero-photo-wrap">
-      <img src="silvana_pro.jpg" alt="Silvana" class="hero-photo">
-    </div>
-  </div>
-</section>
+  <!-- ============ HERO SECTION ============ -->
+  <section class="hero" id="hero">
+    <canvas id="particles"></canvas>
+    <div class="hero-glow"></div>
 
-<section id="about">
-  <div class="reveal">
-    <div class="section-label">01 — about</div>
-    <h2 class="section-title">About Me</h2>
-    <p class="about-text">
-      I'm <strong>Silvana</strong>, a front-end developer passionate about
-      creating <strong>elegant, modern web experiences</strong>. I care about
-      the small details — clean code, thoughtful layouts, and interfaces that
-      feel good to use, not just look good.
-    </p>
-  </div>
-</section>
+    <div class="hero-container">
 
-<section id="skills">
-  <div class="reveal">
-    <div class="section-label">02 — skills</div>
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-pill"><span class="dot" style="background:#E8B94F"></span>HTML</div>
-      <div class="skill-pill"><span class="dot" style="background:#5FD3C4"></span>CSS</div>
-      <div class="skill-pill"><span class="dot" style="background:#F2F0EA"></span>JavaScript</div>
-    </div>
-  </div>
-</section>
+      <div class="hero-text" data-reveal>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Available for freelance work</p>
 
-<section id="projects">
-  <div class="reveal">
-    <div class="section-label">03 — projects</div>
-    <h2 class="section-title">Projects</h2>
-    <div class="project-card">
-  <span class="mono">// project 01</span>
-  <h3 style="font-family:'Fraunces', serif; font-size:1.4rem; margin:14px 0; color:var(--text);">
-    My First Portfolio
-  </h3>
-  <p style="color:var(--muted); margin-bottom:20px;">
-    Where it all began — my very first web project, built from the ground up with HTML, CSS, and JavaScript. A small step that taught me the fundamentals of front-end development.
-  </p>
-  <a href="https://silvanaali145-alt.github.io/my-first-project/" target="_blank" class="btn btn-primary">
-    View Project →
-  </a>
-  </div>
-</section>
-<section class="certificates-section" id="certificates">
-  <div class="container">
-    <h2 class="section-title">My Certificates</h2>
-    <p class="section-subtitle">A collection of certifications and achievements</p>
+        <h1 class="hero-title">
+          Hi, I'm <span class="hero-name">Silvana</span><br>
+          I build interfaces <span class="hero-highlight">that feel alive</span>.
+        </h1>
 
-    <div class="certificates-grid">
+        <p class="hero-tagline">
+          Front-End Developer crafting fast, accessible, and pixel-precise
+          experiences with HTML, CSS &amp; JavaScript — where clean code meets
+          thoughtful motion.
+        </p>
 
-      <!-- شهادة 1: Prompt Engineering -->
-      <div class="certificate-card">
-        <div class="certificate-image">
-          <img src="certificat.AI2.jpg" alt="Prompt Engineering Certificate">
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            View Projects
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://github.com/devflowx2" target="_blank" rel="noopener" class="btn btn-outline">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.02 2.81-.02 3.19 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg>
+            GitHub Profile
+          </a>
         </div>
-        <div class="certificate-info">
-          <h3>Prompt Engineering for AI</h3>
-          <p>
-            Successfully completed the "1 Million Prompters" initiative by
-            Dubai Future Foundation and Dubai Centre for Artificial
-            Intelligence, focused on mastering AI prompt engineering skills
-            in alignment with Dubai's AI strategy.
+
+      </div>
+
+      <!-- Signature element: live-typing code editor -->
+      <div class="hero-editor" data-reveal>
+        <div class="editor-glow"></div>
+        <div class="editor-window">
+          <div class="editor-topbar">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="editor-filename">developer.js</span>
+          </div>
+          <pre class="editor-body"><code id="typedCode"></code><span class="editor-cursor">&nbsp;</span></pre>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll down">
+      <span>Scroll</span>
+      <div class="scroll-cue-line"></div>
+    </a>
+  </section>
+
+  <!-- ============ ABOUT SECTION ============ -->
+  <section class="about" id="about">
+    <div class="section-inner">
+
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> About</p>
+        <h2>The person behind the code</h2>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="about-visual" data-reveal>
+          <div class="portrait-ring">
+            <img src="silvana_pro.jpg" alt="Portrait" class="portrait-img">
+          </div>
+          <div class="about-stat-card">
+            <span class="about-stat-number" data-count="3">0</span>
+            <span class="about-stat-label">Years building<br>on the web</span>
+          </div>
+        </div>
+
+        <div class="about-content" data-reveal>
+          <p class="about-lead">
+            I'm a front-end developer who thinks in components, cares about
+            milliseconds, and believes good interfaces should feel invisible —
+            fast, obvious, and a little bit delightful.
           </p>
-        </div>
-      </div>
-
-      <!-- شهادة 2: HTML -->
-      <div class="certificate-card">
-        <div class="certificate-image">
-          <img src="certificat html.jpg" alt="Introduction to HTML Certificate">
-        </div>
-        <div class="certificate-info">
-          <h3>Introduction to HTML</h3>
-          <p>
-            Completed the "Introduction to HTML" course by Sololearn,
-            demonstrating both theoretical and practical understanding of
-            HTML fundamentals for building web pages.
+          <p class="about-body">
+            My work sits at the intersection of design and engineering: turning
+            static ideas into interactive, responsive products. I spend most of
+            my time in HTML, CSS and JavaScript, obsessing over layout systems,
+            motion timing and code that's as clean to read as it is to use.
           </p>
+
+          <div class="skills">
+            <div class="skill" data-reveal>
+              <div class="skill-head">
+                <span class="skill-name">HTML5</span>
+                <span class="skill-percent" data-target="95">0%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-fill="95"></div></div>
+            </div>
+
+            <div class="skill" data-reveal>
+              <div class="skill-head">
+                <span class="skill-name">CSS3 / Animations</span>
+                <span class="skill-percent" data-target="90">0%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-fill="90"></div></div>
+            </div>
+
+            <div class="skill" data-reveal>
+              <div class="skill-head">
+                <span class="skill-name">JavaScript</span>
+                <span class="skill-percent" data-target="85">0%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-fill="85"></div></div>
+            </div>
+
+            <div class="skill" data-reveal>
+              <div class="skill-head">
+                <span class="skill-name">Responsive / UI Systems</span>
+                <span class="skill-percent" data-target="88">0%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-fill="88"></div></div>
+            </div>
+          </div>
         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CERTIFICATES SECTION ============ -->
+  <section class="certificates" id="certificates">
+    <div class="section-inner">
+
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Credentials</p>
+        <h2>Certificates</h2>
+        <p class="section-subtext">Courses and programs I've completed along the way.</p>
       </div>
 
-    </div>
-  </div>
-</section>
+      <!--
+        To add another certificate later: copy one <article class="certificate-card"> block
+        below (including its closing </article> tag) and paste it right before </div> that
+        closes .certificate-grid. Then update the title, issuer, date, image and link.
+      -->
+      <div class="certificate-grid">
 
-<section id="contact">
-  <div class="reveal">
-    <div class="section-label">04 — contact</div>
-    <h2 class="section-title">Let's Connect</h2>
-    <div class="contact-wrap">
-      <a href="https://www.instagram.com/silvana.codes/" target="_blank" class="contact-link">
-        <span class="label"><span class="icon">📷</span> Instagram</span>
-        <span class="arrow">→</span>
-      </a> 
-      <a href="https://wa.me/+963934191381" target="_blank" class="contact-link">
-        <span class="label"><span class="icon">💬</span> WhatsApp</span>
-        <span class="arrow">→</span>
-      </a>
-    </div>
-  </div>
-</section>
+        <article class="certificate-card" data-reveal data-tilt>
+          <div class="project-card-glow"></div>
+          <div class="certificate-thumb">
+            <img src="certificat.AI2.jpg" alt="Certificate one preview">
+          </div>
+          <div class="certificate-info">
+            <span class="certificate-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M9 13.5 7 22l5-3 5 3-2-8.5"/></svg>
+              Certificate
+            </span>
+            <!-- عدّلي العنوان والجهة المانحة والتاريخ حسب شهادتك -->
+            <h3>Certificate AI</h3>
+            <!-- <p class="certificate-issuer">Issuing Organization · 2024</p> -->
+            <!-- <a href="" target="_blank" rel="noopener" class="btn btn-small btn-outline">View Certificate</a> -->
+          </div>
+        </article>
 
-<footer>
-  built with <span>&lt;3</span> by silvana.codes — 2026
+        <article class="certificate-card" data-reveal data-tilt>
+          <div class="project-card-glow"></div>
+          <div class="certificate-thumb">
+            <img src="certificat html.jpg" alt="Certificate two preview">
+          </div>
+          <div class="certificate-info">
+            <span class="certificate-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M9 13.5 7 22l5-3 5 3-2-8.5"/></svg>
+              Certificate
+            </span>
+            <!-- عدّلي العنوان والجهة المانحة والتاريخ حسب شهادتك -->
+            <h3>Certificate HTML</h3>
+            <!-- <p class="certificate-issuer">Issuing Organization · 2024</p> -->
+            <!-- <a href="" target="_blank" rel="noopener" class="btn btn-small btn-outline">View Certificate</a> -->
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS SECTION ============ -->
+  <section class="projects" id="projects">
+    <div class="section-inner">
+
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Work</p>
+        <h2>Selected projects</h2>
+        <p class="section-subtext">A few things I've built, broken, and rebuilt better.</p>
+      </div>
+
+      <!--
+        To add another project later: copy one <article class="project-card"> block
+        below (including its closing </article> tag) and paste it right before </div> that
+        closes .project-grid. Then update the title, description, tags, image and links —
+        the grid and hover/tilt effects will apply automatically to any new card.
+      -->
+      <div class="project-grid">
+
+        <article class="project-card" data-reveal data-tilt>
+          <div class="project-card-glow"></div>
+          <div class="project-thumb">
+            <img src="FIRST,PROJECT.jpeg" alt="First portfolio project preview">
+          </div>
+          <div class="project-info">
+            <h3>My First Portfolio</h3>
+            <p>A simple personal portfolio built during my training program —
+              my first hands-on project putting front-end fundamentals into practice.</p>
+            <div class="tag-list">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://devflowx2.github.io/my-first-project/" target="_blank" rel="noopener" class="btn btn-small btn-primary">Live Demo</a>
+              <a href="https://github.com/devflowx2/my-first-project.git" target="_blank" rel="noopener" class="btn btn-small btn-outline">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.02 2.81-.02 3.19 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg>
+                Code
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-reveal data-tilt>
+          <div class="project-card-glow"></div>
+          <div class="project-thumb">
+            <img src="SMART,TODO.jpeg" alt="Todo list app preview">
+          </div>
+          <div class="project-info">
+            <h3>Todo List App</h3>
+            <p>A task management app to add, complete, and delete to-dos with a
+              clean interface and smooth state-driven interactions.</p>
+            <div class="tag-list">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <div class="project-actions">      
+              <a href="https://devflowx2.github.io/smart.todo.app/" target="_blank" rel="noopener" class="btn btn-small btn-primary">Live Demo</a>
+              <a href="https://github.com/devflowx2/smart.todo.app.git" target="_blank" rel="noopener" class="btn btn-small btn-outline">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.02 2.81-.02 3.19 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg>
+                Code
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-reveal data-tilt>
+          <div class="project-card-glow"></div>
+          <div class="project-thumb">
+            <!-- ضيف مسار صورة بورتفوليو الفنان هون (Add artist portfolio image path here) -->
+            <img src="HEVDAR.jpeg" alt="Kurdish artist portfolio preview">
+          </div>
+          <div class="project-info">
+            <h3>Kurdish Artist Portfolio</h3>
+            <p>A portfolio website built for a Kurdish artist who works primarily
+              with wood, showcasing his handcrafted pieces in a clean visual gallery.</p>
+            <div class="tag-list">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://devflowx2.github.io/hevdar-osman-portfolio/" target="_blank" rel="noopener" class="btn btn-small btn-primary">Live Demo</a>
+              <a href="https://github.com/devflowx2/hevdar-osman-portfolio.git" target="_blank" rel="noopener" class="btn btn-small btn-outline">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.02 2.81-.02 3.19 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg>
+                Code
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GITHUB SECTION ============ -->
+  <section class="github" id="github">
+    <div class="section-inner">
+      <div class="github-panel" data-reveal>
+        <div class="github-panel-glow"></div>
+
+        <div class="github-left">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> Open Source</p>
+          <h2>Most of what I build lives on GitHub</h2>
+          <p class="section-subtext">
+            Commits, side-projects, and the occasional 2am refactor — it's all there.
+          </p>
+          <a href="https://github.com/devflowx2" target="_blank" rel="noopener" class="btn btn-primary btn-large">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.02 2.81-.02 3.19 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg>
+            Visit GitHub Profile
+          </a>
+        </div>
+
+        <div class="github-right">
+          <!-- Optional: live GitHub stats image (uncomment to use) -->
+          <!-- <img src="https://github-readme-stats.vercel.app/api?username=devflowx2&show_icons=true&theme=transparent" alt="GitHub stats" class="github-stats-img"> -->
+          <div class="github-stat-grid">
+            <div class="github-stat"><span class="github-stat-num" data-count="120">0</span><span>Repositories</span></div>
+            <div class="github-stat"><span class="github-stat-num" data-count="900">0</span><span>Contributions</span></div>
+            <div class="github-stat"><span class="github-stat-num" data-count="40">0</span><span>Stars Earned</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT SECTION ============ -->
+  <section class="contact" id="contact">
+    <div class="section-inner">
+      <div class="contact-inner" data-reveal>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Contact</p>
+        <h2>Let's build something great together</h2>
+        <p class="section-subtext">
+          Open to freelance projects, collaborations, and interesting problems.
+          Reach out on whichever platform you prefer.
+        </p>
+
+        <a href="mailto:silvanaali145@gmail.com" class="contact-email">silvanaali145@gmail.com</a>
+
+        <div class="social-row">
+          <a href="https://github.com/devflowx2" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.02 2.81-.02 3.19 0 .31.21.67.8.56A10.53 10.53 0 0 0 23.5 12.02C23.5 5.74 18.27.5 12 .5Z"/></svg>
+          </a>
+          <!--
+            LinkedIn: not live yet — once the profile is created, uncomment the block
+            below and add the profile URL in href.
+
+            <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+            </a>
+          -->
+          <a href="https://www.instagram.com/silvana.codes?igsh=OTlpb3JraTV2ZzF4" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.24 2.22.41.56.21.96.47 1.38.89.42.42.68.82.89 1.38.17.42.36 1.05.41 2.22.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.8-.41 2.22-.21.56-.47.96-.89 1.38-.42.42-.82.68-1.38.89-.42.17-1.05.36-2.22.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.24-2.22-.41a3.75 3.75 0 0 1-1.38-.89 3.75 3.75 0 0 1-.89-1.38c-.17-.42-.36-1.05-.41-2.22-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.24-1.8.41-2.22.21-.56.47-.96.89-1.38.42-.42.82-.68 1.38-.89.42-.17 1.05-.36 2.22-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56a5.9 5.9 0 0 0-2.14 1.39A5.9 5.9 0 0 0 .61 4.16c-.3.76-.5 1.63-.56 2.91C0 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.3.79.71 1.46 1.39 2.14a5.9 5.9 0 0 0 2.14 1.39c.76.3 1.63.5 2.91.56 1.27.06 1.68.07 4.93.07s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.14-1.39 5.9 5.9 0 0 0 1.39-2.14c.3-.76.5-1.63.56-2.91.06-1.27.07-1.68.07-4.93s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.39-2.14A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>
+          </a>
+          <a href="https://wa.me/963934191381" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.02 0C5.4 0 .04 5.36.04 11.98c0 2.11.55 4.17 1.6 6l-1.7 6.22 6.36-1.67a11.9 11.9 0 0 0 5.72 1.46h.01c6.62 0 11.98-5.36 11.98-11.98C24 5.37 18.65 0 12.02 0Zm7 16.9c-.29.83-1.46 1.53-2.02 1.61-.52.08-1.18.11-1.9-.12-.44-.14-1-.32-1.72-.62-3.03-1.31-5.01-4.38-5.16-4.58-.15-.2-1.23-1.64-1.23-3.13 0-1.49.78-2.22 1.06-2.53.28-.3.6-.38.8-.38.2 0 .4 0 .58.01.19.01.44-.07.68.53.29.72.98 2.5 1.06 2.68.08.18.13.39.02.62-.11.23-.16.37-.32.57-.16.2-.34.44-.48.6-.16.17-.33.36-.14.7.19.34.86 1.42 1.85 2.3 1.27 1.13 2.34 1.48 2.68 1.65.34.17.54.14.74-.08.2-.23.86-1 1.09-1.34.23-.34.46-.28.77-.17.32.11 2.02.95 2.37 1.12.34.17.57.26.65.4.09.15.09.85-.2 1.67Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Silvana — Crafted with HTML, CSS &amp; JavaScript.</p>
+  <a href="#hero" class="footer-top">Back to top ↑</a>
 </footer>
 
-<script>
-  // Header background on scroll
-  const header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  // Typing animation for hero headline
-  const headlineEl = document.getElementById('typedHeadline');
-  const fullText = "I'm Silvana.";
-  let i = 0;
-  function typeWriter(){
-    if(i <= fullText.length){
-      headlineEl.innerHTML = fullText.slice(0, i) + '<span class="cursor">&nbsp;</span>';
-      i++;
-      setTimeout(typeWriter, 80);
-    }
-  }
-  typeWriter();
-
-  // Scroll reveal animation
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
