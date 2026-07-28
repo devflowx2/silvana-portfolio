@@ -151,7 +151,7 @@ function initTypedCode() {
 
   const codeLines = [
     { text: 'const developer = {', cls: '' },
-    { text: '  name: "Your Name",', cls: '' },
+    { text: '  name: "Silvana Ali",', cls: '' },
     { text: '  role: "Front-End Developer",', cls: '' },
     { text: '  stack: ["HTML", "CSS", "JavaScript"],', cls: '' },
     { text: '  passion: "clean UI + smooth motion",', cls: '' },
